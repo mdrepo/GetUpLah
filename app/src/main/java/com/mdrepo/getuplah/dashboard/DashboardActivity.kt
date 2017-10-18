@@ -1,13 +1,12 @@
 package com.mdrepo.getuplah.dashboard
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.EditText
+import com.mdrepo.getuplah.LocationActivity
 import com.mdrepo.getuplah.R
 import kotlinx.android.synthetic.main.activity_main.*
 
-class DashboardActivity : AppCompatActivity() {
+class DashboardActivity : LocationActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

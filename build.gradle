@@ -33,4 +33,5 @@ ext {
     buildToolsVersion = '26.0.2'
     play_services_version = '11.4.2'
     play_services_plugin_version = '3.0.0'
+    support_library_version = '26.1.0'
 }

@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "789731540423",
+    "firebase_url": "https://get-up-lah-sg.firebaseio.com",
+    "project_id": "get-up-lah-sg",
+    "storage_bucket": "get-up-lah-sg.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:789731540423:android:491041e0c965222c",
+        "android_client_info": {
+          "package_name": "com.mdrepo.getuplah"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "789731540423-ji0j6vknc9hrhmi2kmkbg660cshl8l54.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDudF-EWktmDSkIvBO7REhoBxv8BMXPJ7g"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
