@@ -35,7 +35,7 @@ public class PermissionUtil() {
         if (!hasPermission(context, permission)) {
             if (ActivityCompat.shouldShowRequestPermissionRationale(context as Activity, permission)) {
                 listener?.onPermissionPreviouslyDenied()
-            } else if (SharedPreferencesUtil.isLocationPermissionAsked()) {
+            } else if (!SharedPreferencesUtil.isLocationPermissionAsked()) {
                 listener?.onNeedPermission()
             } else {
                 listener?.onPermissionDisabled()

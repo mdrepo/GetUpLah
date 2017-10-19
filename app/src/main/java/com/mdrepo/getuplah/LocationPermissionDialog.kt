@@ -3,6 +3,7 @@ package com.mdrepo.getuplah
 import android.app.AlertDialog
 import android.app.DialogFragment
 import android.content.Context
+import android.content.DialogInterface
 import android.os.Bundle
 
 /**
@@ -43,8 +44,17 @@ public class LocationPermissionDialog: DialogFragment() {
                 .setTitle(title)
                 .setMessage(text)
                 .setPositiveButton("Okay", { dialogInterface, i -> run { mListener?.onClicked(true) }})
-                .setOnCancelListener {dialogInterface -> run { mListener?.onClicked(false) }}
                 .create()
+    }
+
+    override fun onDismiss(dialog: DialogInterface?) {
+        super.onDismiss(dialog)
+        mListener?.onClicked(false)
+    }
+
+    override fun onCancel(dialog: DialogInterface?) {
+        super.onCancel(dialog)
+        mListener?.onClicked(false)
     }
 
     internal interface Listener {
