@@ -13,6 +13,7 @@ open class LocationActivity : AppCompatActivity(), PermissionUtil.PermissionList
 
     private var mFusedLocationClient: FusedLocationProviderClient? = null
     private var mPermissionUtil: PermissionUtil? = null
+    var isFetchingLocation: Boolean = false
 
     companion object {
         private val LOCATION_REQUEST: Int = 123
@@ -30,7 +31,7 @@ open class LocationActivity : AppCompatActivity(), PermissionUtil.PermissionList
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         when (requestCode) {
             LOCATION_REQUEST -> {
-                if (grantResults.size > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     onPermissionGranted()
                 } else {
                     onPermissionPreviouslyDenied()
@@ -43,6 +44,7 @@ open class LocationActivity : AppCompatActivity(), PermissionUtil.PermissionList
     private fun getLocation() {
         mFusedLocationClient!!.lastLocation
                 .addOnCompleteListener(this) { task ->
+                    // isFetchingLocation = false
                     if (task.isSuccessful && task.result != null) {
                         val location: Location = task.result
                         Toast.makeText(applicationContext,
@@ -74,6 +76,7 @@ open class LocationActivity : AppCompatActivity(), PermissionUtil.PermissionList
 
     override fun onPermissionGranted() {
         getLocation()
+        isFetchingLocation = true
     }
 
     // Location dialog callback

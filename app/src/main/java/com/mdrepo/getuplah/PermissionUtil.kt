@@ -14,7 +14,7 @@ import android.support.v7.app.AppCompatActivity
 /**
  * Created by Mayur Dube on 18/10/17.
  */
-public class PermissionUtil() {
+public class PermissionUtil {
 
     fun shouldAskPermission(): Boolean {
         return Build.VERSION.SDK_INT >= Build.VERSION_CODES.M
@@ -31,11 +31,11 @@ public class PermissionUtil() {
     }
 
     fun checkPermission(context: Context, permission: String) {
-        val listener: PermissionListener  = context as PermissionListener
+        val listener: PermissionListener = context as PermissionListener
         if (!hasPermission(context, permission)) {
             if (ActivityCompat.shouldShowRequestPermissionRationale(context as Activity, permission)) {
                 listener?.onPermissionPreviouslyDenied()
-            } else if (!SharedPreferencesUtil.isLocationPermissionAsked()) {
+            } else if (SharedPreferencesUtil.isLocationPermissionAsked()) {
                 listener?.onNeedPermission()
             } else {
                 listener?.onPermissionDisabled()
