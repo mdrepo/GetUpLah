@@ -43,7 +43,7 @@ public class LocationPermissionDialog: DialogFragment() {
         return AlertDialog.Builder(activity)
                 .setTitle(title)
                 .setMessage(text)
-                .setPositiveButton("Okay", { dialogInterface, i -> run { mListener?.onClicked(true) }})
+                .setPositiveButton("Okay", { _, _ -> run { mListener?.onClicked(true) }})
                 .create()
     }
 

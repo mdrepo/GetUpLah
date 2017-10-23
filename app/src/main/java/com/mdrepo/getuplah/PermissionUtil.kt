@@ -34,14 +34,14 @@ public class PermissionUtil {
         val listener: PermissionListener = context as PermissionListener
         if (!hasPermission(context, permission)) {
             if (ActivityCompat.shouldShowRequestPermissionRationale(context as Activity, permission)) {
-                listener?.onPermissionPreviouslyDenied()
-            } else if (SharedPreferencesUtil.isLocationPermissionAsked()) {
-                listener?.onNeedPermission()
+                listener.onPermissionPreviouslyDenied()
+            } else if (!SharedPreferencesUtil.isLocationPermissionAsked()) {
+                listener.onNeedPermission()
             } else {
-                listener?.onPermissionDisabled()
+                listener.onPermissionDisabled()
             }
         } else {
-            listener?.onPermissionGranted()
+            listener.onPermissionGranted()
         }
     }
 

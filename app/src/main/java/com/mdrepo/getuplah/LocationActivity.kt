@@ -1,6 +1,7 @@
 package com.mdrepo.getuplah
 
 import android.content.pm.PackageManager
+import android.databinding.ObservableBoolean
 import android.location.Location
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -13,7 +14,6 @@ abstract class LocationActivity : AppCompatActivity(), PermissionUtil.Permission
 
     private var mFusedLocationClient: FusedLocationProviderClient? = null
     private var mPermissionUtil: PermissionUtil? = null
-    var isFetchingLocation: Boolean = false
 
     companion object {
         private val LOCATION_REQUEST: Int = 123
@@ -40,7 +40,8 @@ abstract class LocationActivity : AppCompatActivity(), PermissionUtil.Permission
         }
     }
 
-    abstract fun onLocation(location: Location)
+    abstract fun onLocationFetched(location: Location)
+    abstract fun onFetchingLocation()
 
     @SuppressWarnings("MissingPermission")
     private fun getLocation() {
@@ -49,6 +50,7 @@ abstract class LocationActivity : AppCompatActivity(), PermissionUtil.Permission
                     // isFetchingLocation = false
                     if (task.isSuccessful && task.result != null) {
                         val location: Location = task.result
+                        onLocationFetched(location)
                         Toast.makeText(applicationContext,
                                 "lat=${location.latitude} long=${location.longitude}",
                                 Toast.LENGTH_SHORT).show()
@@ -78,7 +80,7 @@ abstract class LocationActivity : AppCompatActivity(), PermissionUtil.Permission
 
     override fun onPermissionGranted() {
         getLocation()
-        isFetchingLocation = true
+        onFetchingLocation()
     }
 
     // Location dialog callback

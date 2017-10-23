@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -18,6 +19,16 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+
+    testOptions.unitTests.all {
+        testLogging {
+            events 'passed', 'skipped', 'failed', 'standardOut', 'standardError'
+        }
+    }
+
+    dataBinding {
+        enabled = true
     }
 }
 buildscript {
@@ -44,6 +55,8 @@ dependencies {
     testCompile "$rootProject.ext.robolectric"
     testCompile "$rootProject.ext.mockito"
     compile "$rootProject.ext.android_arch_lifecycle_extensions"
+    compile "$rootProject.ext.rxAndroid"
+    kapt "com.android.databinding:compiler:$gradleVersion"
 }
 
 
