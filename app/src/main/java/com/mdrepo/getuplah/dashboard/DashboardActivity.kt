@@ -1,5 +1,6 @@
 package com.mdrepo.getuplah.dashboard
 
+import android.location.Location
 import android.os.Bundle
 import android.view.View
 import com.mdrepo.getuplah.LocationActivity
@@ -15,6 +16,10 @@ class DashboardActivity : LocationActivity() {
     }
 
     private fun chooseLocation(ed: View) {
+
+    }
+
+    override fun onLocation(location: Location) {
 
     }
 }

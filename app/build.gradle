@@ -43,6 +43,7 @@ dependencies {
     testCompile 'junit:junit:4.12'
     testCompile "$rootProject.ext.robolectric"
     testCompile "$rootProject.ext.mockito"
+    compile "$rootProject.ext.android_arch_lifecycle_extensions"
 }
 
 

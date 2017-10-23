@@ -9,7 +9,7 @@ import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 
 
-open class LocationActivity : AppCompatActivity(), PermissionUtil.PermissionListener, LocationPermissionDialog.Listener {
+abstract class LocationActivity : AppCompatActivity(), PermissionUtil.PermissionListener, LocationPermissionDialog.Listener {
 
     private var mFusedLocationClient: FusedLocationProviderClient? = null
     private var mPermissionUtil: PermissionUtil? = null
@@ -39,6 +39,8 @@ open class LocationActivity : AppCompatActivity(), PermissionUtil.PermissionList
             }
         }
     }
+
+    abstract fun onLocation(location: Location)
 
     @SuppressWarnings("MissingPermission")
     private fun getLocation() {
