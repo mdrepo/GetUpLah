@@ -57,6 +57,7 @@ dependencies {
     compile "$rootProject.ext.android_arch_lifecycle_extensions"
     compile "$rootProject.ext.rxAndroid"
     kapt "com.android.databinding:compiler:$gradleVersion"
+    compile project(path: ':library:networksdk')
 }
 
 

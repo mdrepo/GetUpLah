@@ -13,21 +13,21 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class DashboardActivity : LocationActivity() {
 
-    private lateinit var viewModel: LocationViewModel
-
     /**
      * https://maps.googleapis.com/maps/api/place/nearbysearch/json?key=AIzaSyBfd8ukTjKUxAzrTZV6-W6HjzcnVGfEZT8&location=1.301800,103.837797&rankby=distance&language=zh-TW&types=bus_station
 
      */
+    val locationViewModel by lazy {
+        getViewModel()
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         ed_choose_location.setOnClickListener({chooseLocation(it)})
-        viewModel = getViewModel()
-        viewModel.location.observe(this, Observer { viewModel.loadTravelStops(it) })
-
         val binding: ActivityMainBinding = ActivityMainBinding.inflate(layoutInflater)
-        binding.viewmodel = viewModel
+        binding.viewmodel = locationViewModel
+        locationViewModel.location.observe(this, Observer { locationViewModel.loadTravelStops(it) })
     }
 
     private fun chooseLocation(ed: View) {
@@ -35,14 +35,13 @@ class DashboardActivity : LocationActivity() {
     }
 
     override fun onLocationFetched(location: Location) {
-        viewModel.location.value = location
+        locationViewModel?.location.value = location
     }
 
     override fun onFetchingLocation() {
-        viewModel.isLoading.set(true)
+        locationViewModel?.isLoading.set(true)
     }
-    fun getViewModel(): LocationViewModel {
-        return ViewModelProviders.of(this).get(LocationViewModel::class.java)
-    }
+
+    fun getViewModel(): LocationViewModel = ViewModelProviders.of(this).get(LocationViewModel::class.java)
 }
 
