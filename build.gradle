@@ -6,7 +6,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath "com.android.tools.build:gradle:$gradleVersion"
+        classpath 'com.android.tools.build:gradle:3.0.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
@@ -42,4 +42,7 @@ ext {
     retrofit_rx =  "com.squareup.retrofit2:adapter-rxjava2:2.3.0"
     retrofit_gson_convertor = 'com.squareup.retrofit2:converter-gson:2.3.0'
     retrofit_logging_interceptor = "com.squareup.okhttp3:logging-interceptor:3.6.0"
+    recyclerview = "com.android.support:recyclerview-v7:$support_library_version"
+    cardview = "com.android.support:cardview-v7:$support_library_version"
+    appcompatlibrary = "com.android.support:appcompat-v7:$support_library_version"
 }

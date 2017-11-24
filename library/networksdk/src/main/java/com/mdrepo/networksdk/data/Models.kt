@@ -27,5 +27,10 @@ public data class Result(@SerializedName("geometry") val geometry: Geometry,
                          @SerializedName("reference") val reference: String,
                          @SerializedName("types") val types: Array<String>,
                          @SerializedName("scope") val scope: String,
-                         @SerializedName("vicinity") val vicinity: String)
+                         @SerializedName("vicinity") val vicinity: String) {
+
+    fun isBusstop(): Boolean = types.contains("bus_station")
+
+    fun isSubwaystation(): Boolean = types.contains("subway_station")
+}
 

@@ -1,5 +1,6 @@
 package com.mdrepo.getuplah
 
+import android.content.Context
 import android.content.pm.PackageManager
 import android.databinding.ObservableBoolean
 import android.location.Location
@@ -8,6 +9,9 @@ import android.support.v7.app.AppCompatActivity
 import android.widget.Toast
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
+import android.location.LocationManager
+import android.content.Context.LOCATION_SERVICE
+import android.util.Log
 
 
 abstract class LocationActivity : AppCompatActivity(), PermissionUtil.PermissionListener, LocationPermissionDialog.Listener {
@@ -45,9 +49,25 @@ abstract class LocationActivity : AppCompatActivity(), PermissionUtil.Permission
 
     @SuppressWarnings("MissingPermission")
     private fun getLocation() {
-        mFusedLocationClient!!.lastLocation
-                .addOnCompleteListener(this) { task ->
+        var gpsEnabled = false
+        val lm = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        try {
+            gpsEnabled = lm.isProviderEnabled(LocationManager.GPS_PROVIDER)
+        } catch (ex: Exception) {
+
+        }
+
+        var networkGpsEnabled = false
+        try {
+            networkGpsEnabled = lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
+        } catch (ex: Exception) {
+        }
+
+        Log.d("TAG", "${networkGpsEnabled} ${gpsEnabled}")
+        mFusedLocationClient?.lastLocation?.addOnCompleteListener(this) { task ->
                     // isFetchingLocation = false
+                    Log.d("TAG", "exception=${task.exception} \n isSuccesful=${task.isSuccessful}  \n" +
+                            " Result=${task.result} \n task=${task}")
                     if (task.isSuccessful && task.result != null) {
                         val location: Location = task.result
                         onLocationFetched(location)
@@ -56,9 +76,9 @@ abstract class LocationActivity : AppCompatActivity(), PermissionUtil.Permission
                                 Toast.LENGTH_SHORT).show()
                     } else {
                         Toast.makeText(applicationContext,
-                                "location failed with ${task.exception}",
+                                "location failed",
                                 Toast.LENGTH_SHORT).show()
-                        task.exception!!.printStackTrace()
+                        task.exception?.printStackTrace()
                     }}
     }
 

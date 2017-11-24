@@ -4,10 +4,13 @@ import android.app.Application
 import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.MutableLiveData
 import android.content.Context
+import android.databinding.ObservableArrayList
 import android.databinding.ObservableBoolean
+import android.databinding.ObservableList
 import android.location.Location
 import android.widget.Toast
 import com.mdrepo.networksdk.TransitService
+import com.mdrepo.networksdk.data.Result
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
@@ -19,6 +22,7 @@ class LocationViewModel(context: Application) : AndroidViewModel(context) {
     var location: MutableLiveData<Location> = MutableLiveData()
     var isLoading = ObservableBoolean(false)
     private val context: Context = context.applicationContext
+    val items: ObservableList<Result> = ObservableArrayList()
 
     val transitService by lazy {
         TransitService()
@@ -26,13 +30,16 @@ class LocationViewModel(context: Application) : AndroidViewModel(context) {
 
     fun loadTravelStops(location: Location?) {
         if (location != null) {
-            Toast.makeText(context, "Loading bus stops for ${location?.latitude}", Toast.LENGTH_SHORT).show()
             transitService.getStops(location.latitude.toString(), location.longitude.toString())
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe({ busStops ->
-                        val name = busStops.results[0].name
-                        Toast.makeText(context, name, Toast.LENGTH_SHORT).show()
+                    .subscribe({ results ->
+                        if (results.isOk()) {
+                            with(items) {
+                                clear()
+                                addAll(results.results)
+                            }
+                        }
                         isLoading.set(false)
                         isLoading.notifyPropertyChanged(BR.viewmodel)
                     }, {
@@ -41,5 +48,6 @@ class LocationViewModel(context: Application) : AndroidViewModel(context) {
                     })
         }
     }
+
 
 }
