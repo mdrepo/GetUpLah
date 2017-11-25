@@ -1,5 +1,6 @@
 package com.mdrepo.getuplah
 
+import android.location.Location
 import junit.framework.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
@@ -19,22 +20,31 @@ import org.robolectric.annotation.Config
 @Config(constants = BuildConfig::class)
 public class LocationActivityTest {
 
-    private lateinit var controller: ActivityController<LocationActivity>
-    private lateinit var activity: LocationActivity
+    private lateinit var controller: ActivityController<TestActivity>
+    private lateinit var activity: TestActivity
     private lateinit var mPermissionUtil: PermissionUtil
 
     @Before
     public fun setup() {
-        controller = Robolectric.buildActivity(LocationActivity::class.java)
+        controller = Robolectric.buildActivity(TestActivity::class.java)
         mPermissionUtil = mock(PermissionUtil::class.java)
-
+        activity = controller.create().start().resume().get()
     }
 
     @Test
     public fun testPermissionUtilLocationDisabled() {
-        activity = controller.get()
         `when`(mPermissionUtil!!.hasPermission(activity, activity.permission)).thenReturn(true)
         assertTrue(mPermissionUtil!!.hasPermission(activity, activity.permission))
-        controller.create()
+    }
+
+    class TestActivity: LocationActivity() {
+        override fun onLocationFetched(location: Location) {
+
+        }
+
+        override fun onFetchingLocation() {
+
+        }
+
     }
 }

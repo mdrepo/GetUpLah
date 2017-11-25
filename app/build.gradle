@@ -6,6 +6,11 @@ apply plugin: 'kotlin-kapt'
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
     buildToolsVersion rootProject.ext.buildToolsVersion
+    testOptions {
+        unitTests {
+            includeAndroidResources = true
+        }
+    }
     defaultConfig {
         applicationId "com.mdrepo.getuplah"
         minSdkVersion rootProject.ext.minSdkVersion
@@ -46,20 +51,28 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
-    compile "com.google.android.gms:play-services:$rootProject.ext.play_services_version"
-    compile "$rootProject.ext.appcompatlibrary"
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    compile "com.android.support:support-v13:$rootProject.ext.support_library_version"
-    testCompile 'junit:junit:4.12'
-    testCompile "$rootProject.ext.robolectric"
-    testCompile "$rootProject.ext.mockito"
-    compile "$rootProject.ext.android_arch_lifecycle_extensions"
-    compile "$rootProject.ext.rxAndroid"
-    compile "$rootProject.ext.recyclerview"
-    compile "$rootProject.ext.cardview"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    implementation "com.google.android.gms:play-services:$rootProject.ext.play_services_version"
+    implementation "$rootProject.ext.appcompatlibrary"
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    implementation "com.android.support:support-v13:$rootProject.ext.support_library_version"
+    implementation "$rootProject.ext.android_arch_lifecycle_extensions"
+    implementation "$rootProject.ext.rxAndroid"
+    implementation "$rootProject.ext.recyclerview"
+    implementation "$rootProject.ext.cardview"
     kapt "com.android.databinding:compiler:$gradleVersion"
-    compile project(path: ':library:networksdk')
+    implementation project(path: ':library:networksdk')
+
+    // test dependencies
+    testImplementation "$rootProject.ext.junit"
+    testImplementation "$rootProject.ext.mockito"
+    testImplementation "$rootProject.ext.hamcrest"
+    testImplementation "$rootProject.ext.robolectric"
+    testImplementation "$rootProject.ext.mockito"
+    testImplementation "$rootProject.ext.test_runner"
+    testImplementation "$rootProject.ext.test_rules"
+    testImplementation "$rootProject.ext.robolectric"
+
 }
 
 
