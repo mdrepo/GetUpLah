@@ -40,7 +40,7 @@ class TransitStopAdapter(private var transitStops: List<Result>) : RecyclerView.
 
         fun bind(transitStop: Result?) {
             transitStop?.let {
-                title.setText(transitStop.name);
+                title.text = transitStop.name;
                 if (transitStop.isBusstop()) icon.setImageResource(R.drawable.bus)
                 if (transitStop.isSubwaystation()) icon.setImageResource(R.drawable.train)
             }

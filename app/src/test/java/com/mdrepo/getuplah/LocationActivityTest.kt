@@ -33,8 +33,8 @@ public class LocationActivityTest {
 
     @Test
     public fun testPermissionUtilLocationDisabled() {
-        `when`(mPermissionUtil!!.hasPermission(activity, activity.permission)).thenReturn(true)
-        assertTrue(mPermissionUtil!!.hasPermission(activity, activity.permission))
+        `when`(mPermissionUtil.hasPermission(activity, activity.permission)).thenReturn(true)
+        assertTrue(mPermissionUtil.hasPermission(activity, activity.permission))
     }
 
     class TestActivity: LocationActivity() {

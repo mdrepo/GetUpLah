@@ -14,7 +14,7 @@ import java.io.IOException
 class TransitService {
 
 
-    val transitAPIService by lazy {
+    private val transitAPIService by lazy {
         TransitStopAPI.create()
     }
 
