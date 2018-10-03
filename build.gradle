@@ -1,13 +1,13 @@
 
 buildscript {
-    ext.kotlin_version = '1.2.21'
-    ext.gradleVersion = '3.0.1'
+    ext.kotlin_version = '1.2.71'
+    ext.gradleVersion = '3.2.0'
     repositories {
         jcenter()
         google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.0.1'
+        classpath "com.android.tools.build:gradle:$gradleVersion"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
 
     }
@@ -29,12 +29,12 @@ task clean(type: Delete) {
 
 
 ext {
-    minSdkVersion = 14
-    compileSdkVersion = 26 // also targetSdkVersion
-    buildToolsVersion = '26.0.2'
+    minSdkVersion = 15
+    compileSdkVersion = 28 // also targetSdkVersion
+    buildToolsVersion = '28.0.2'
     play_services_version = '11.4.2'
     play_services_plugin_version = '3.0.0'
-    support_library_version = '26.1.0'
+    support_library_version = '28.0.0'
     junitVersion = '4.12'
     mockitoVersion = '2.8.47'
     hamcrestVersion = '1.3'
@@ -42,16 +42,16 @@ ext {
     rulesVersion = '1.0.1'
     espressoVersion = '3.0.1'
 
-    robolectric = 'org.robolectric:robolectric:3.4.2'
     mockito = 'org.mockito:mockito-core:2.+'
-    android_arch_lifecycle_extensions = 'android.arch.lifecycle:extensions:1.0.0-rc1'
+    android_arch_lifecycle_extensions = 'android.arch.lifecycle:extensions:1.1.1'
 
-    rxAndroid = "io.reactivex.rxjava2:rxandroid:2.0.1"
+    rxAndroid = "io.reactivex.rxjava2:rxandroid:2.1.0"
 
     retrofit = "com.squareup.retrofit2:retrofit:2.3.0"
-    retrofit_rx =  "com.squareup.retrofit2:adapter-rxjava2:2.3.0"
-    retrofit_gson_convertor = 'com.squareup.retrofit2:converter-gson:2.3.0'
-    retrofit_logging_interceptor = "com.squareup.okhttp3:logging-interceptor:3.6.0"
+    retrofit_rx =  "com.squareup.retrofit2:adapter-rxjava2:2.4.0"
+    retrofit_gson_convertor = 'com.squareup.retrofit2:converter-gson:2.4.0'
+    retrofit_logging_interceptor = "com.squareup.okhttp3:logging-interceptor:3.11.0"
+
     recyclerview = "com.android.support:recyclerview-v7:$support_library_version"
     cardview = "com.android.support:cardview-v7:$support_library_version"
     appcompatlibrary = "com.android.support:appcompat-v7:$support_library_version"
@@ -62,5 +62,5 @@ ext {
     hamcrest = "org.hamcrest:hamcrest-all:$hamcrestVersion"
     test_runner = "com.android.support.test:runner:$runnerVersion"
     test_rules = "com.android.support.test:rules:$rulesVersion"
-    robolectric = "org.robolectric:robolectric:3.5.1"
+    robolectric = "org.robolectric:robolectric:3.7.1"
 }
