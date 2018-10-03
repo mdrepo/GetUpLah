@@ -23,19 +23,19 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:26.+'
+    implementation "com.android.support:appcompat-v7:$rootProject.ext.support_library_version"
 
-    testCompile 'junit:junit:4.12'
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
-    compile "$rootProject.ext.retrofit"
-    compile "$rootProject.ext.retrofit_rx"
-    compile "$rootProject.ext.retrofit_gson_convertor"
-    compile "$rootProject.ext.retrofit_logging_interceptor"
-    compile "$rootProject.ext.rxAndroid"
+    testImplementation "$rootProject.ext.junit"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    implementation "$rootProject.ext.retrofit"
+    implementation "$rootProject.ext.retrofit_rx"
+    implementation "$rootProject.ext.retrofit_gson_convertor"
+    implementation "$rootProject.ext.retrofit_logging_interceptor"
+    implementation "$rootProject.ext.rxAndroid"
 }
 repositories {
     mavenCentral()
