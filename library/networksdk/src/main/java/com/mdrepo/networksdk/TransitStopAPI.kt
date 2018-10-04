@@ -2,15 +2,13 @@ package com.mdrepo.networksdk
 
 import com.mdrepo.networksdk.data.PlacesResponse
 import io.reactivex.Observable
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
-import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
-
-
 
 /**
  * Created by Mayur on 23/10/17.
@@ -19,6 +17,10 @@ import okhttp3.logging.HttpLoggingInterceptor
 interface TransitStopAPI {
 
     companion object {
+        const val PARAM_KEY = "key"
+        const val PARAM_LOCATION = "location"
+        const val PARAM_TYPES = "types"
+
         fun create(): TransitStopAPI {
 
             val interceptor = HttpLoggingInterceptor()
@@ -28,15 +30,15 @@ interface TransitStopAPI {
             val retrofit = Retrofit.Builder()
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .addConverterFactory(GsonConverterFactory.create())
-                    .baseUrl("https://maps.googleapis.com")
+                    .baseUrl(Config.BASE_URL)
                     .client(client)
                     .build()
 
             return retrofit.create(TransitStopAPI::class.java)
         }
     }
-    @GET("maps/api/place/nearbysearch/json?&rankby=distance")
-    public fun getStopsAround(@Query("key") apiKey: String,
-                              @Query("location") lat: String,
-                              @Query("types") type: String): Observable<PlacesResponse>
+    @GET(Config.PATH_TO_MAPS)
+    public fun getStopsAround(@Query(PARAM_KEY) apiKey: String,
+                              @Query(PARAM_LOCATION) lat: String,
+                              @Query(PARAM_TYPES) type: String): Observable<PlacesResponse>
 }

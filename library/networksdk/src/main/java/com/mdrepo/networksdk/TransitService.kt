@@ -13,30 +13,32 @@ import java.io.IOException
  */
 class TransitService {
 
+    companion object {
+        const val MAPS_QUERY_TYPE_TRANSIT_STATION = "transit_station"
+    }
 
     private val transitAPIService by lazy {
         TransitStopAPI.create()
     }
 
-    public fun getStops(lat: String, long: String): Observable<PlacesResponse> {
+    fun getStops(latlng: String): Observable<PlacesResponse> {
         return Observable.create<PlacesResponse> { e ->
             transitAPIService
-                    .getStopsAround("AIzaSyBfd8ukTjKUxAzrTZV6-W6HjzcnVGfEZT8",
-                            lat + "," + long,
-                            "transit_station")
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe({ response ->
-                        if (response.isOk()) {
-                            e.onNext(response)
-                        } else {
-                            e.onError(IOException())
-                        }
-                    }, { error ->
-                        error.printStackTrace()
-                        Log.d("t", error.message)
-                        e.onError(error)
-                    })
+                .getStopsAround(BuildConfig.MAPS_KEY,
+                    latlng,
+                    MAPS_QUERY_TYPE_TRANSIT_STATION)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({ response ->
+                    if (response.isOk()) {
+                        e.onNext(response)
+                    } else {
+                        e.onError(IOException())
+                    }
+                }, { error ->
+                    error.printStackTrace()
+                    e.onError(error)
+                })
         }
     }
 }

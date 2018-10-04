@@ -63,7 +63,6 @@ dependencies {
     implementation "$rootProject.ext.rxAndroid"
     implementation "$rootProject.ext.recyclerview"
     implementation "$rootProject.ext.cardview"
-    kapt "com.android.databinding:compiler:$gradleVersion"
     implementation project(path: ':library:networksdk')
     implementation 'com.android.support:multidex:1.0.1'
     // test dependencies

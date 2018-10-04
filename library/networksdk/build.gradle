@@ -18,6 +18,10 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "MAPS_KEY", "\"AIzaSyBfd8ukTjKUxAzrTZV6-W6HjzcnVGfEZT8\""
+        }
+        debug {
+            buildConfigField "String", "MAPS_KEY", "\"AIzaSyBfd8ukTjKUxAzrTZV6-W6HjzcnVGfEZT8\""
         }
     }
 }
@@ -30,6 +34,15 @@ dependencies {
     implementation "com.android.support:appcompat-v7:$rootProject.ext.support_library_version"
 
     testImplementation "$rootProject.ext.junit"
+    testImplementation "$rootProject.ext.junit"
+    testImplementation "$rootProject.ext.mockito"
+    testImplementation "$rootProject.ext.hamcrest"
+    testImplementation "$rootProject.ext.robolectric"
+    testImplementation "$rootProject.ext.mockito"
+    testImplementation "$rootProject.ext.test_runner"
+    testImplementation "$rootProject.ext.test_rules"
+    testImplementation "$rootProject.ext.robolectric"
+
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
     implementation "$rootProject.ext.retrofit"
     implementation "$rootProject.ext.retrofit_rx"
