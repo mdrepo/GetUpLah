@@ -1,8 +1,6 @@
 package com.mdrepo.getuplah.dashboard
 
-import android.databinding.DataBindingUtil
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,13 +18,13 @@ class TransitStopAdapter(private var transitStops: List<Result>) : RecyclerView.
         return transitStops.size
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): TransitStopViewHolder {
-        val view = LayoutInflater.from(parent?.context).inflate(R.layout.row_transit_stop, parent, false)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TransitStopViewHolder {
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.row_transit_stop, parent, false)
         return TransitStopViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: TransitStopViewHolder?, position: Int) {
-        holder?.bind(transitStops[position])
+    override fun onBindViewHolder(holder: TransitStopViewHolder, position: Int) {
+        holder.bind(transitStops[position])
     }
 
     fun replaceData(transitStops: List<Result>) {
