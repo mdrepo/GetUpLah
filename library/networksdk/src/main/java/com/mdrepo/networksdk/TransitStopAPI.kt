@@ -37,8 +37,9 @@ interface TransitStopAPI {
             return retrofit.create(TransitStopAPI::class.java)
         }
     }
+
     @GET(Config.PATH_TO_MAPS)
-    public fun getStopsAround(@Query(PARAM_KEY) apiKey: String,
-                              @Query(PARAM_LOCATION) lat: String,
-                              @Query(PARAM_TYPES) type: String): Observable<PlacesResponse>
+    fun getStopsAround(@Query(PARAM_KEY) apiKey: String,
+                       @Query(PARAM_LOCATION) lat: String,
+                       @Query(PARAM_TYPES) type: String): Observable<PlacesResponse>
 }

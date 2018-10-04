@@ -30,7 +30,7 @@ class DashboardActivity : LocationActivity() {
             it?.takeIf {
                 it.longitude != null && it.latitude != null
             }?.let {
-                val latLng = applicationContext.getString(R.string.latlng, it.latitude, it.longitude)
+                val latLng =  it.latitude.toString() + "," + it.longitude.toString()
                 locationViewModel.loadTravelStops(latLng)
             }
         })

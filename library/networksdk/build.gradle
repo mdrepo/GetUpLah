@@ -18,10 +18,10 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            buildConfigField "String", "MAPS_KEY", "\"AIzaSyBfd8ukTjKUxAzrTZV6-W6HjzcnVGfEZT8\""
+            buildConfigField "String", "MAPS_KEY", "\"AIzaSyBi_FLoTVqh7WePvYdSUrTNvYb5S2093tw\""
         }
         debug {
-            buildConfigField "String", "MAPS_KEY", "\"AIzaSyBfd8ukTjKUxAzrTZV6-W6HjzcnVGfEZT8\""
+            buildConfigField "String", "MAPS_KEY", "\"AIzaSyBi_FLoTVqh7WePvYdSUrTNvYb5S2093tw\""
         }
     }
 }
